@@ -1,7 +1,8 @@
 import sqlite3
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 running = True
+lis = []
 
 conn = sqlite3.connect("budget.db")
 
@@ -77,13 +78,23 @@ while running:
         
         remaining = inc - exp
 
+        lis.append(inc)
+        lis.append(exp)
+        lis.append(remaining)
+
         print("\n===== SUMMARY =====")
         print("Total Income  :", inc)
         print("Total Expense :", exp)
         print("Remaining     :", remaining)
 
+
     elif choice == 4:
-        print("Working on it.")
+        print("Charts")
+        plt.title("Pie Chart")
+        labels = ["Total Income", "Total Expenses", "Total Budget"]
+        plt.pie(lis, labels= labels, autopct="%1.1f%%")
+        plt.show()
+
 
     elif choice == 5:
         print("Complete.")
